@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zero Capex Water Infrastructure | PT Invila Tirta Nusantara</title>
+    <title>Zero Capex Water Infrastructure | INVILA GROUP</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (Auto-compile) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts (Opsional agar tulisan rapi) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
 
-    <!-- React & ReactDOM -->
+    <!-- React & ReactDOM (Untuk menjalankan JSX tanpa Node.js) -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel for JSX -->
+    <!-- Babel (Compiler JSX di dalam Browser) -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <!-- Lucide Icons -->
@@ -35,7 +30,7 @@
     <script type="text/babel">
         const { useState, useMemo, useEffect } = React;
 
-        // --- Wrapper Komponen Ikon Lucide untuk HTML Statis ---
+        // --- SISTEM PEMBACA IKON UNTUK HTML STATIS ---
         const Icon = ({ name, className }) => {
             useEffect(() => {
                 lucide.createIcons();
@@ -43,319 +38,526 @@
             return <i data-lucide={name} className={className}></i>;
         };
 
-        // Pemetaan Ikon agar sesuai dengan pemanggilan JSX
+        // Pemetaan Ikon sesuai kode Anda
         const ArrowRight = (p) => <Icon name="arrow-right" {...p} />;
         const BarChart3 = (p) => <Icon name="bar-chart-3" {...p} />;
         const Building2 = (p) => <Icon name="building-2" {...p} />;
         const CheckCircle2 = (p) => <Icon name="check-circle-2" {...p} />;
         const ChevronRight = (p) => <Icon name="chevron-right" {...p} />;
-        const Activity = (p) => <Icon name="activity" {...p} />;
+        const ClipboardCheck = (p) => <Icon name="clipboard-check" {...p} />;
         const Droplets = (p) => <Icon name="droplets" {...p} />;
         const Factory = (p) => <Icon name="factory" {...p} />;
         const MessageCircle = (p) => <Icon name="message-circle" {...p} />;
         const ShieldCheck = (p) => <Icon name="shield-check" {...p} />;
         const Wallet = (p) => <Icon name="wallet" {...p} />;
-        const ExternalLink = (p) => <Icon name="external-link" {...p} />;
-        const BarChart2 = (p) => <Icon name="bar-chart-2" {...p} />;
+        const Waves = (p) => <Icon name="waves" {...p} />;
 
-        // --- Fungsi Utilitas ---
+        // =================================================================
+        // DI BAWAH INI ADALAH KODE REACT ASLI ANDA (TANPA PERUBAHAN APAPUN)
+        // =================================================================
+
         const currency = (value) =>
-            new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                maximumFractionDigits: 0,
-            }).format(value);
+          new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            maximumFractionDigits: 0,
+          }).format(value);
 
-        const SectionEyebrow = ({ children }) => (
-            <p className="text-sm font-bold uppercase tracking-[0.22em] text-teal-700">
-                {children}
+        const NumberStat = ({ label, value, hint, dark = false }) => (
+          <div
+            className={`rounded-2xl border p-5 shadow-sm ${
+              dark
+                ? 'border-white/10 bg-white/5 text-white'
+                : 'border-slate-300 bg-white text-slate-950'
+            }`}
+          >
+            <p
+              className={`text-xs font-semibold uppercase tracking-[0.18em] ${
+                dark ? 'text-slate-400' : 'text-slate-500'
+              }`}
+            >
+              {label}
             </p>
+            <div className="mt-3 text-2xl font-semibold tracking-tight">{value}</div>
+            {hint ? (
+              <p className={`mt-2 text-sm ${dark ? 'text-slate-300' : 'text-slate-500'}`}>{hint}</p>
+            ) : null}
+          </div>
         );
 
-        // --- Komponen Utama Aplikasi ---
+        const FeatureCard = ({ icon: IconCmp, title, description }) => (
+          <div className="rounded-3xl border border-slate-700/70 bg-slate-900/70 p-7 shadow-xl shadow-black/10 transition duration-300 hover:-translate-y-1 hover:border-amber-400/30">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-400/10 text-amber-300">
+              <IconCmp className="h-6 w-6" />
+            </div>
+            <h3 className="mt-5 text-xl font-semibold tracking-tight text-white">{title}</h3>
+            <p className="mt-3 text-base leading-7 text-slate-300">{description}</p>
+          </div>
+        );
+
+        const StepCard = ({ number, title, description }) => (
+          <div className="rounded-3xl border border-slate-300 bg-white p-6 shadow-lg shadow-slate-900/5 transition duration-300 hover:-translate-y-1 hover:border-amber-500/40">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
+              {number}
+            </div>
+            <h4 className="mt-5 text-lg font-semibold text-slate-950">{title}</h4>
+            <p className="mt-2 leading-7 text-slate-600">{description}</p>
+          </div>
+        );
+
+        const SectorBadge = ({ children, dark = false }) => (
+          <div
+            className={`rounded-full border px-4 py-2 text-sm font-medium shadow-sm ${
+              dark
+                ? 'border-white/10 bg-white/5 text-slate-200'
+                : 'border-slate-300 bg-white text-slate-700'
+            }`}
+          >
+            {children}
+          </div>
+        );
+
+        const SectionEyebrow = ({ children, dark = false }) => (
+          <p
+            className={`text-sm font-semibold uppercase tracking-[0.22em] ${
+              dark ? 'text-amber-300' : 'text-teal-700'
+            }`}
+          >
+            {children}
+          </p>
+        );
+
         function App() {
-            const [volume, setVolume] = useState(1500);
-            const [currentCost, setCurrentCost] = useState(7500);
+          const [volume, setVolume] = useState(1000);
+          const [currentCost, setCurrentCost] = useState(7000);
 
-            const invilaRate = 4200;
-            const monthlySaving = useMemo(
-                () => Math.max(0, (currentCost - invilaRate) * volume * 30),
-                [currentCost, volume]
-            );
-            const yearlySaving = monthlySaving * 12;
+          const invilaRate = 4500;
+          const monthlySaving = useMemo(
+            () => Math.max(0, (currentCost - invilaRate) * volume * 30),
+            [currentCost, volume]
+          );
+          const yearlySaving = monthlySaving * 12;
 
-            const targetPhone = '6285219493322';
-            const portalLink = 'https://invila.asia';
-            
-            // Dynamic WhatsApp Message Generator
-            const waMessage = `Halo Tim Invila, pabrik saya memiliki estimasi volume air ${volume.toLocaleString('id-ID')} m3/hari. Saya melihat simulasi penghematan di website zerocapexwaterinfrastructure.com.\n\nBisa berikan gambaran awal atau jadwalkan audit kelayakan model WaaS untuk kasus ini?`;
-            const whatsappLink = `https://wa.me/${targetPhone}?text=${encodeURIComponent(waMessage)}`;
+          const whatsappLink = 'https://wa.me/6285219493322';
+          const portalLink = 'https://invila.asia';
 
-            return (
-                <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-teal-500/30 border-t-8 border-teal-600">
-                
-                {/* HEADER / NAV (No-Distraction) */}
-                <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md">
-                    <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-                    <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 text-lg font-black text-white">
-                        I
-                        </div>
-                        <div className="leading-none">
-                        <div className="text-sm font-bold text-slate-900 tracking-tight">INVILA GROUP</div>
-                        <div className="text-[10px] font-semibold uppercase tracking-widest text-teal-600">
-                            Water Infrastructure
-                        </div>
-                        </div>
+          return (
+            <div className="min-h-screen scroll-smooth bg-[#d9dde1] text-slate-900 antialiased">
+              <div className="absolute inset-x-0 top-0 -z-10 h-[720px] bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.12),transparent_32%),linear-gradient(180deg,#f4f5f6_0%,#d9dde1_38%,#0f1720_100%)]" />
+
+              <header className="sticky top-0 z-40 border-b border-slate-700/10 bg-[#e9ecef]/85 backdrop-blur-xl">
+                <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-sm font-bold text-white shadow-lg shadow-slate-900/20">
+                      I
                     </div>
-                    <a
-                        href={whatsappLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hidden md:flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-teal-600 transition-colors"
-                    >
-                        Diskusikan Kelayakan Kasus Anda <ArrowRight className="h-4 w-4" />
-                    </a>
+                    <div>
+                      <div className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-500">INVILA TM</div>
+                      <div className="text-sm text-slate-900">Zero Capex Water Infrastructure</div>
                     </div>
-                </nav>
+                  </div>
 
-                <main>
-                    {/* SECTION 1: HERO FINANSIAL (Fase Relevan) */}
-                    <section className="pt-16 pb-20 px-6 max-w-5xl mx-auto text-center">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-teal-100 bg-teal-50 px-4 py-1.5 text-xs font-semibold text-teal-700 mb-8">
-                        <BarChart2 className="h-4 w-4" /> Solusi Efisiensi Industri B2B
-                    </div>
+                  <div className="hidden items-center gap-8 md:flex">
+                    <a href="#solution" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">Solusi</a>
+                    <a href="#calculator" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">Kalkulator</a>
+                    <a href="#process" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">Cara Kerja</a>
+                    <a href={portalLink} target="_blank" className="text-sm font-medium text-slate-600 transition hover:text-slate-950">Portal Teknis</a>
+                  </div>
 
-                    <h1 className="text-4xl font-extrabold leading-[1.15] tracking-tight text-slate-900 md:text-6xl mb-8">
-                        Amankan Cash Flow Pabrik Anda <br className="hidden md:block" />
-                        Dari Beban <span className="text-teal-600">Capex Air Limbah.</span>
-                    </h1>
-
-                    <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-600 md:text-xl mb-12">
-                        Kami mengambil alih beban investasi awal dan risiko operasional Anda. Dapatkan infrastruktur pengolahan air berskala industri dengan model <span className="font-bold text-slate-900">Zero Capex</span>.
-                    </p>
-
-                    {/* 3 Trust Bullets */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm font-medium text-slate-700 md:gap-12">
-                        <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-teal-500" /> Tanpa Investasi Awal
-                        </div>
-                        <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-teal-500" /> Risiko Operasional Terkelola
-                        </div>
-                        <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-teal-500" /> Kepatuhan Baku Mutu Terjaga
-                        </div>
-                    </div>
-                    </section>
-
-                    {/* SECTION 2: PAIN POINT & MODEL ZERO CAPEX (Fase Lega) */}
-                    <section className="border-y border-slate-200 bg-white py-20">
-                    <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
-                        <div className="space-y-8">
-                        <h2 className="text-3xl font-bold leading-tight text-slate-900">
-                            Ekspansi produksi tidak seharusnya tertunda oleh utilitas limbah.
-                        </h2>
-                        <p className="text-lg leading-relaxed text-slate-600">
-                            Setiap rupiah yang terkunci pada Capex air limbah adalah dana yang hilang untuk ekspansi mesin produksi Anda. Model <strong>Water as a Service (WaaS)</strong> dari Invila menstruktur ulang beban tersebut menjadi biaya operasional (Opex) yang ringan, terukur, dan masuk akal.
-                        </p>
-
-                        {/* Alur Sederhana */}
-                        <div className="space-y-6 pt-4">
-                            <div className="flex items-start gap-4">
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
-                                1
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-slate-900">Assessment & Audit</h3>
-                                <p className="mt-1 text-sm text-slate-500">Evaluasi karakteristik air dan volume untuk menetapkan kelayakan efisiensi.</p>
-                            </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-900 text-sm font-bold text-white">
-                                2
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-slate-900">Structure & Deployment</h3>
-                                <p className="mt-1 text-sm text-slate-500">Invila membiayai dan menginstalasi teknologi pengolahan di fasilitas Anda.</p>
-                            </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-600 text-sm font-bold text-white">
-                                3
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-teal-700">Managed Service</h3>
-                                <p className="mt-1 text-sm text-slate-600">Anda hanya membayar biaya per meter kubik air yang berhasil dikelola sesuai baku mutu.</p>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-
-                        {/* SECTION 3: KALKULATOR (Fase Masuk Akal - Micro-Commitment) */}
-                        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-8 shadow-xl shadow-slate-200/50 md:p-12">
-                        <div className="absolute right-0 top-0 -z-10 h-32 w-32 rounded-bl-full bg-teal-100/50"></div>
-
-                        <h3 className="mb-2 text-2xl font-bold text-slate-900">Business Tool: Kalkulasi ROI</h3>
-                        <p className="mb-10 text-sm text-slate-500">Masukkan estimasi data pabrik Anda untuk melihat potensi restrukturisasi biaya.</p>
-
-                        <div className="space-y-8">
-                            {/* Input Volume */}
-                            <div className="space-y-4">
-                            <div className="flex items-end justify-between">
-                                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                                Estimasi Volume Harian
-                                </label>
-                                <span className="text-2xl font-bold text-slate-900">
-                                {volume.toLocaleString('id-ID')} <span className="text-sm font-medium text-slate-400">m³/hari</span>
-                                </span>
-                            </div>
-                            <input
-                                type="range"
-                                min="100"
-                                max="10000"
-                                step="100"
-                                value={volume}
-                                onChange={(e) => setVolume(Number(e.target.value))}
-                                className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-300 accent-teal-600"
-                                style={{ WebkitAppearance: 'none', background: '#cbd5e1', height: '6px', borderRadius: '10px' }}
-                            />
-                            </div>
-
-                            {/* Input Cost */}
-                            <div className="space-y-4">
-                            <div className="flex items-end justify-between">
-                                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                                Total Biaya Saat Ini (Opex)
-                                </label>
-                                <span className="text-2xl font-bold text-slate-900">
-                                {currency(currentCost)} <span className="text-sm font-medium text-slate-400">/m³</span>
-                                </span>
-                            </div>
-                            <input
-                                type="range"
-                                min="1000"
-                                max="25000"
-                                step="500"
-                                value={currentCost}
-                                onChange={(e) => setCurrentCost(Number(e.target.value))}
-                                className="h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-300 accent-slate-900"
-                                style={{ WebkitAppearance: 'none', background: '#cbd5e1', height: '6px', borderRadius: '10px' }}
-                            />
-                            </div>
-                        </div>
-
-                        <div className="mt-10 border-t border-slate-200 pt-8">
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-teal-600">
-                            Potensi Penghematan Kas (Per Bulan)
-                            </p>
-                            <div className="mb-6 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-                            {currency(monthlySaving)}
-                            </div>
-
-                            <a
-                            href={whatsappLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-teal-600 py-4 font-semibold text-white shadow-md transition-colors hover:bg-teal-700"
-                            >
-                            Ajukan Analisa Awal ROI Pabrik Anda <ArrowRight className="h-4 w-4" />
-                            </a>
-                            <p className="mt-4 text-center text-[10px] font-medium text-slate-500">
-                            Langkah awal tanpa komitmen finansial.
-                            </p>
-                        </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* SECTION 4: PROOF & RISK REVERSAL (Fase Aman) */}
-                <section className="bg-slate-50 py-20">
-                <div className="mx-auto max-w-7xl px-6">
-                    <div className="grid gap-10 md:grid-cols-3">
-                    <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
-                        <ShieldCheck className="h-6 w-6 text-slate-800" />
-                        </div>
-                        <h4 className="mb-3 text-lg font-bold text-slate-900">Manajemen Risiko Berbasis SLA</h4>
-                        <p className="text-sm leading-relaxed text-slate-600">
-                        Pembayaran model WaaS terikat pada parameter kinerja. Kesesuaian output air terhadap baku mutu adalah tanggung jawab operasional kami, menurunkan risiko compliance Anda.
-                        </p>
-                    </div>
-                    <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
-                        <Activity className="h-6 w-6 text-slate-800" />
-                        </div>
-                        <h4 className="mb-3 text-lg font-bold text-slate-900">Live SCADA-IoT Monitoring</h4>
-                        <p className="text-sm leading-relaxed text-slate-600">
-                        Kinerja sistem, pH, TSS, dan debit air terukur secara presisi dan objektif. Data operasional dapat diakses real-time oleh tim manajemen Anda kapan saja.
-                        </p>
-                    </div>
-                    <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-                        <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100">
-                        <Building2 className="h-6 w-6 text-slate-800" />
-                        </div>
-                        <h4 className="mb-3 text-lg font-bold text-slate-900">Benchmark Kepercayaan Industri</h4>
-                        <p className="text-sm leading-relaxed text-slate-600">
-                        Pendekatan infrastruktur kami telah teruji kelayakannya di berbagai fasilitas vital, mulai dari Kawasan Industri strategis hingga fasilitas utilitas daerah.
-                        </p>
-                    </div>
-                    </div>
-
-                    {/* Proof Benchmark Industri */}
-                    <div className="mt-16 border-t border-slate-200 pt-12">
-                    <p className="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
-                        Kelayakan Ekosistem Dipercaya Oleh Lingkungan Industri:
-                    </p>
-                    <div className="flex flex-wrap items-center justify-center gap-8 font-bold text-slate-400 opacity-70 md:gap-16 lg:text-xl">
-                        <span>KI WIJAYAKUSUMA</span>
-                        <span>SPAM DEPOK</span>
-                        <span>PDAM MEDAN</span>
-                        <span>PETRO GRESIK</span>
-                    </div>
-                    </div>
-                </div>
-                </section>
-
-                {/* SECTION 5: JEMBATAN DELEGASI TEKNIS (Fase Penasaran Terarah) */}
-                <section className="bg-slate-900 px-6 py-24 text-center text-white">
-                <div className="mx-auto max-w-3xl">
-                    <h2 className="mb-6 text-3xl font-bold md:text-4xl">Validasi Kapabilitas Teknis Kami.</h2>
-                    <p className="mb-10 text-lg leading-relaxed text-slate-300">
-                    Keputusan komersial membutuhkan persetujuan operasional. Silakan teruskan tautan portal teknis kami kepada <strong>Plant Manager</strong> atau <strong>Tim Engineering</strong> Anda untuk membedah ekosistem teknologi INVILA.
-                    </p>
-                    <a
-                    href={portalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 px-8 py-4 font-semibold transition-all hover:bg-white/20"
-                    >
-                    Buka Portal Teknis invila.asia <ExternalLink className="h-4 w-4" />
-                    </a>
-                </div>
-                </section>
-
-                {/* FINAL CTA / FOOTER */}
-                <footer className="border-t border-slate-200 bg-white px-6 py-16 text-center">
-                <div className="mx-auto max-w-2xl">
-                    <SectionEyebrow>Langkah Berikutnya</SectionEyebrow>
-                    <h2 className="mb-8 mt-4 text-3xl font-bold text-slate-900">Mulai Evaluasi Kasus Anda</h2>
-                    <a
+                  <a
                     href={whatsappLink}
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="mb-10 inline-flex items-center gap-2 rounded-xl bg-slate-900 px-8 py-4 font-semibold text-white shadow-md transition-colors hover:bg-slate-800"
-                    >
-                    Minta Simulasi Awal Model WaaS <MessageCircle className="h-4 w-4" />
-                    </a>
-                    <p className="text-xs font-medium uppercase tracking-widest text-slate-400">
-                    © 2026 PT INVILA TIRTA NUSANTARA
-                    </p>
+                    className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                  >
+                    Chat WhatsApp
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
                 </div>
-                </footer>
-            </main>
+              </header>
+
+              <a
+                href={whatsappLink}
+                target="_blank"
+                className="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-slate-950 shadow-2xl shadow-black/20 transition hover:scale-105 hover:bg-amber-400"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Chat INVILA
+              </a>
+
+              <main>
+                <section className="mx-auto grid max-w-7xl gap-14 px-6 pb-20 pt-16 lg:grid-cols-[1.12fr_0.88fr] lg:px-8 lg:pb-28 lg:pt-20">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-teal-700/15 bg-teal-900/5 px-4 py-2 text-sm font-medium text-teal-900">
+                      <Waves className="h-4 w-4" />
+                      SCADA-IoT Enabled Infrastructure
+                    </div>
+
+                    <h1 className="mt-8 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 md:text-6xl md:leading-[1.03]">
+                      Infrastruktur Air Industri yang Lebih Cerdas, Tanpa Membebani Capex Perusahaan.
+                    </h1>
+
+                    <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700 md:text-xl">
+                      Dengan model <span className="font-semibold text-slate-950">Zero Capex Infrastructure</span>, INVILA membantu perusahaan mendapatkan sistem air industri yang terukur, termonitor, dan siap operasional tanpa investasi awal yang mengunci likuiditas.
+                    </p>
+
+                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                      >
+                        Chat untuk Analisa Kebutuhan
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                      <a
+                        href={portalLink}
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-400/80 px-6 py-4 text-sm font-semibold text-slate-900 transition hover:border-slate-500 hover:bg-white/50"
+                      >
+                        Lihat Kapabilitas Teknis
+                        <ChevronRight className="h-4 w-4" />
+                      </a>
+                    </div>
+
+                    <div className="mt-12 grid gap-4 sm:grid-cols-3">
+                      <NumberStat label="Investasi Awal" value="0 IDR" hint="Struktur pembiayaan dirancang tanpa capex awal." />
+                      <NumberStat label="Monitoring" value="SCADA-IoT" hint="Visibilitas performa dan operasional lebih terukur." />
+                      <NumberStat label="Model Layanan" value="Managed" hint="Operasi dan pemeliharaan didukung INVILA." />
+                    </div>
+                  </div>
+
+                  <div className="rounded-[32px] border border-slate-300 bg-[linear-gradient(180deg,rgba(255,255,255,0.95),rgba(235,239,242,0.96))] p-8 shadow-2xl shadow-slate-900/10 lg:p-10">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Untuk Pengambil Keputusan</p>
+                        <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-950">Lebih ringan bagi cash flow. Lebih jelas bagi operasional.</h2>
+                      </div>
+                      <div className="hidden h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-white md:flex">
+                        <BarChart3 className="h-7 w-7" />
+                      </div>
+                    </div>
+
+                    <div className="mt-8 space-y-5">
+                      {[
+                        'Likuiditas dapat difokuskan untuk ekspansi, peningkatan kapasitas, atau kebutuhan inti bisnis.',
+                        'Kinerja sistem lebih mudah dipantau lewat monitoring SCADA-IoT yang membantu keputusan lebih cepat.',
+                        'Risiko operasional dan kepatuhan lingkungan dapat dikelola lebih terkendali dengan dukungan INVILA.',
+                      ].map((item) => (
+                        <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white/80 p-4">
+                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
+                          <p className="text-sm leading-7 text-slate-700">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-8 rounded-3xl bg-slate-900 p-6 text-white">
+                      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">Arah CTA Utama</p>
+                      <p className="mt-3 text-lg leading-8 text-slate-100">
+                        Mulai dari diskusi kebutuhan dan evaluasi kondisi eksisting, lalu lanjutkan ke visit factory untuk analisa yang lebih relevan dengan kondisi lapangan.
+                      </p>
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        className="mt-5 inline-flex items-center gap-2 rounded-full bg-amber-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                      >
+                        Mulai Diskusi via WhatsApp
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="calculator" className="border-y border-slate-700/10 bg-[#cdd3d8] py-20">
+                  <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+                    <div>
+                      <SectionEyebrow>Kalkulator Sederhana</SectionEyebrow>
+                      <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+                        Lihat gambaran awal potensi efisiensi biaya Anda.
+                      </h2>
+                      <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-700">
+                        Setelah memahami kerangka modelnya, tahap berikutnya adalah melihat seberapa relevan pendekatan INVILA terhadap kondisi eksisting perusahaan Anda.
+                      </p>
+
+                      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                        <NumberStat label="Tarif INVILA" value={currency(invilaRate)} hint="Ilustrasi rate acuan untuk simulasi awal." />
+                        <NumberStat label="Estimasi Tahunan" value={currency(yearlySaving)} hint="Potensi efisiensi jika asumsi simulasi stabil." />
+                      </div>
+                    </div>
+
+                    <div className="rounded-[32px] border border-slate-300 bg-white p-8 shadow-2xl shadow-slate-900/10">
+                      <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+                        <div className="space-y-8">
+                          <div>
+                            <label className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                              Volume Air Harian (m³)
+                            </label>
+                            <div className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+                              {volume.toLocaleString('id-ID')}
+                            </div>
+                            <input
+                              type="range"
+                              min="100"
+                              max="5000"
+                              step="50"
+                              value={volume}
+                              onChange={(e) => setVolume(Number(e.target.value))}
+                              className="mt-4 h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-teal-700"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                              Biaya Saat Ini (IDR/m³)
+                            </label>
+                            <div className="mt-3 text-3xl font-semibold tracking-tight text-slate-950">
+                              {currency(currentCost)}
+                            </div>
+                            <input
+                              type="range"
+                              min="1000"
+                              max="15000"
+                              step="250"
+                              value={currentCost}
+                              onChange={(e) => setCurrentCost(Number(e.target.value))}
+                              className="mt-4 h-2 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-amber-500"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col justify-between rounded-[28px] bg-[linear-gradient(180deg,#0f1720_0%,#1f2d3a_100%)] p-7 text-white">
+                          <div>
+                            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">
+                              Estimasi Penghematan per Bulan
+                            </p>
+                            <div className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
+                              {currency(monthlySaving)}
+                            </div>
+                            <div className="mt-5 inline-flex items-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                              <div>
+                                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-300">
+                                  Estimasi per Tahun
+                                </p>
+                                <p className="mt-1 text-lg font-semibold text-white">
+                                  {currency(yearlySaving)}
+                                </p>
+                              </div>
+                            </div>
+                            <p className="mt-4 text-sm leading-7 text-slate-300">
+                              Simulasi berbasis selisih biaya eksisting terhadap rate ilustratif INVILA. Ini memberi konteks awal sebelum masuk ke analisa kebutuhan yang lebih rinci.
+                            </p>
+                          </div>
+
+                          <div className="mt-8 space-y-3">
+                            <a
+                              href={whatsappLink}
+                              target="_blank"
+                              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-500 px-5 py-4 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                            >
+                              Chat WhatsApp untuk Analisa
+                              <ArrowRight className="h-4 w-4" />
+                            </a>
+                            <a
+                              href={portalLink}
+                              target="_blank"
+                              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-5 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
+                            >
+                              Tinjau Portal Teknis
+                              <ChevronRight className="h-4 w-4" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="solution" className="bg-[linear-gradient(180deg,#0f1720_0%,#111827_100%)] py-20 text-white lg:py-24">
+                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="max-w-3xl">
+                      <SectionEyebrow dark>Nilai untuk Bisnis</SectionEyebrow>
+                      <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+                        Bukan sekadar teknologi, tetapi keputusan bisnis yang lebih matang.
+                      </h2>
+                      <p className="mt-5 text-lg leading-8 text-slate-300">
+                        Semakin jauh pengunjung men-scroll, semakin jelas bahwa model INVILA bukan hanya soal instalasi sistem, tetapi soal menjaga ritme produksi, visibilitas operasional, dan struktur biaya yang lebih terkendali.
+                      </p>
+                    </div>
+
+                    <div className="mt-12 grid gap-6 lg:grid-cols-3">
+                      <FeatureCard
+                        icon={Wallet}
+                        title="Menjaga fleksibilitas cash flow"
+                        description="Perusahaan dapat menghindari capex awal yang besar dan mengalokasikan dana untuk prioritas bisnis yang lebih strategis."
+                      />
+                      <FeatureCard
+                        icon={Droplets}
+                        title="Kinerja sistem lebih terukur"
+                        description="Monitoring berbasis SCADA-IoT membantu tim melihat performa, status operasional, dan kebutuhan tindak lanjut dengan lebih jelas."
+                      />
+                      <FeatureCard
+                        icon={ShieldCheck}
+                        title="Operasional lebih terkendali"
+                        description="Pendekatan managed service membantu perusahaan mengurangi beban pengelolaan harian sekaligus menjaga standar operasional dan kepatuhan."
+                      />
+                    </div>
+
+                    <div className="mt-10 rounded-[32px] border border-white/10 bg-white/5 p-8 shadow-2xl shadow-black/20">
+                      <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                        <div>
+                          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">Kenapa ini penting?</p>
+                          <h3 className="mt-3 text-2xl font-semibold text-white">
+                            Saat beban operasional makin kompleks, perusahaan membutuhkan partner yang membantu menyederhanakan keputusan.
+                          </h3>
+                        </div>
+                        <a
+                          href={whatsappLink}
+                          target="_blank"
+                          className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-6 py-4 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+                        >
+                          Bahas Kebutuhan Anda
+                          <ArrowRight className="h-4 w-4" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="bg-[linear-gradient(180deg,#111827_0%,#0b1220_100%)] py-20 text-white">
+                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+                      <div>
+                        <SectionEyebrow dark>Kesesuaian Implementasi</SectionEyebrow>
+                        <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
+                          Relevan untuk kawasan industri, utilitas air, dan fasilitas produksi.
+                        </h2>
+                        <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+                          Di titik ini, pengunjung sudah tidak hanya melihat manfaat finansial. Mereka mulai melihat apakah model ini benar-benar cocok untuk konteks operasional mereka.
+                        </p>
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                          <Factory className="h-7 w-7 text-amber-300" />
+                          <h3 className="mt-5 text-xl font-semibold">Manufaktur</h3>
+                          <p className="mt-3 leading-7 text-slate-300">Untuk kebutuhan utilitas air yang mendukung kontinuitas proses produksi.</p>
+                        </div>
+                        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                          <Building2 className="h-7 w-7 text-amber-300" />
+                          <h3 className="mt-5 text-xl font-semibold">Kawasan Industri</h3>
+                          <p className="mt-3 leading-7 text-slate-300">Untuk pengelolaan infrastruktur bersama yang membutuhkan kontrol dan efisiensi lebih baik.</p>
+                        </div>
+                        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                          <ClipboardCheck className="h-7 w-7 text-amber-300" />
+                          <h3 className="mt-5 text-xl font-semibold">Environment & Compliance</h3>
+                          <p className="mt-3 leading-7 text-slate-300">Untuk organisasi yang perlu meningkatkan visibilitas dan pengendalian kepatuhan operasional.</p>
+                        </div>
+                        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+                          <Droplets className="h-7 w-7 text-amber-300" />
+                          <h3 className="mt-5 text-xl font-semibold">Utilitas Air</h3>
+                          <p className="mt-3 leading-7 text-slate-300">Untuk sistem yang perlu beroperasi andal dengan monitoring yang lebih baik.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-10 flex flex-wrap gap-3">
+                      <SectorBadge dark>Zero Capex Infrastructure</SectorBadge>
+                      <SectorBadge dark>SCADA-IoT Monitoring</SectorBadge>
+                      <SectorBadge dark>Managed Operations Support</SectorBadge>
+                      <SectorBadge dark>Visit Factory Oriented</SectorBadge>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="process" className="bg-[#e7eaed] py-20 lg:py-24">
+                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div className="max-w-3xl">
+                      <SectionEyebrow>Cara Kerja</SectionEyebrow>
+                      <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+                        Dari ketertarikan awal menuju langkah nyata yang lebih relevan.
+                      </h2>
+                      <p className="mt-5 text-lg leading-8 text-slate-700">
+                        Bagian ini dibuat untuk mendorong pengunjung merasa bahwa langkah selanjutnya sederhana, masuk akal, dan layak dilakukan sekarang.
+                      </p>
+                    </div>
+
+                    <div className="mt-12 grid gap-6 md:grid-cols-3">
+                      <StepCard
+                        number="1"
+                        title="Diskusi kebutuhan"
+                        description="Mulai dari pembicaraan singkat untuk memahami volume, kondisi eksisting, target kualitas, dan konteks operasional perusahaan."
+                      />
+                      <StepCard
+                        number="2"
+                        title="Analisa & visit factory"
+                        description="Tim INVILA meninjau kondisi lapangan agar pendekatan yang diajukan lebih relevan dengan kebutuhan nyata di fasilitas Anda."
+                      />
+                      <StepCard
+                        number="3"
+                        title="Rancangan model solusi"
+                        description="Perusahaan mendapatkan arahan awal mengenai pendekatan sistem, struktur layanan, dan potensi dampak bagi operasional maupun finansial."
+                      />
+                    </div>
+
+                    <div className="mt-10 rounded-[32px] border border-slate-300 bg-white p-8 shadow-2xl shadow-slate-900/10">
+                      <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                        <div>
+                          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-teal-700">Semakin jelas, semakin mudah mengambil langkah</p>
+                          <h3 className="mt-3 text-2xl font-semibold text-slate-950">
+                            Setelah melihat potensi efisiensi, konteks operasional, dan alur kerjanya, tahap paling logis adalah memulai percakapan langsung dengan tim INVILA.
+                          </h3>
+                        </div>
+                        <a
+                          href={whatsappLink}
+                          target="_blank"
+                          className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                        >
+                          Chat WhatsApp Sekarang
+                          <ArrowRight className="h-4 w-4" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section className="border-t border-white/10 bg-[linear-gradient(180deg,#0b1220_0%,#111827_60%,#f59e0b_180%)] py-24 text-white">
+                  <div className="mx-auto max-w-5xl rounded-[40px] border border-white/10 bg-white/5 px-6 py-14 text-center shadow-2xl shadow-black/30 lg:px-10">
+                    <SectionEyebrow dark>Langkah Berikutnya</SectionEyebrow>
+                    <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-semibold tracking-tight md:text-6xl">
+                      Bicarakan kebutuhan Anda sekarang, lalu lanjutkan ke visit factory untuk analisa yang lebih akurat.
+                    </h2>
+                    <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-200">
+                      Di bagian akhir ini, tujuannya sederhana: mengubah rasa tertarik menjadi percakapan nyata. Jika model Zero Capex Water Infrastructure terasa relevan, tombol WhatsApp di bawah ini adalah langkah paling tepat.
+                    </p>
+
+                    <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                      <NumberStat dark label="Langkah Awal" value="Chat WhatsApp" hint="Mulai dari diskusi singkat mengenai kebutuhan Anda." />
+                      <NumberStat dark label="Tahap Berikutnya" value="Visit Factory" hint="Evaluasi kondisi lapangan untuk analisa yang lebih relevan." />
+                      <NumberStat dark label="Arah Tujuan" value="Keputusan Lebih Yakin" hint="Lebih jelas secara finansial, teknis, dan operasional." />
+                    </div>
+
+                    <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-amber-500 px-8 py-5 text-base font-semibold text-slate-950 transition hover:scale-[1.02] hover:bg-amber-400"
+                      >
+                        Chat WhatsApp +6285219493322
+                        <ArrowRight className="h-5 w-5" />
+                      </a>
+                      <a
+                        href={portalLink}
+                        target="_blank"
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 px-8 py-5 text-base font-semibold text-white transition hover:bg-white/10"
+                      >
+                        Kunjungi invila.asia
+                        <ChevronRight className="h-5 w-5" />
+                      </a>
+                    </div>
+                  </div>
+                </section>
+              </main>
             </div>
-            );
+          );
         }
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
